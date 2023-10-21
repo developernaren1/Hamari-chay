@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Include the Google Sign-In API library -->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+  <!-- Set your Google API Client ID -->
+  <meta name="google-signin-client_id" content="152124393191-p5m4gn14409cpe9tf0kbnp914fb5gdat.apps.googleusercontent.com">
+    
+</head>
+<body>
+    
+  <h1>Google Sign-In Example</h1>
+
+  <!-- Create a button to trigger Google Sign-In -->
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+  <!-- Display user information once signed in -->
+  <div id="user-details" style="display: none;">
+    <p>Welcome, <span id="user-name"></span>!</p>
+    <p>Email: <span id="user-email"></span></p>
+    <img id="user-image" alt="User Image">
+    <button onclick="signOut()">Sign out</button>
+  </div>
+
+  <script>
+    function onSignIn(googleUser) {
+      // Extract user information
+      var profile = googleUser.getBasicProfile();
+      var userName = profile.getName();
+      var userEmail = profile.getEmail();
+      var userImage = profile.getImageUrl();
+
+      // Display user information
+      document.getElementById('user-name').textContent = userName;
+      document.getElementById('user-email').textContent = userEmail;
+      document.getElementById('user-image').src = userImage;
+      document.getElementById('user-details').style.display = 'block';
+    }
+
+    function signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        document.getElementById('user-details').style.display = 'none';
+      });
+    }
+  </script>
+</body>
+</html>
+
+</body>
+</html>
